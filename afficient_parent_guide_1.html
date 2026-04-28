@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Afficient Academy — 家长咨询指南</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0B1F3A;
+    --blue: #1A5CFF;
+    --sky: #4A9FFF;
+    --gold: #F5C842;
+    --cream: #FDF8F0;
+    --light: #F0F4FF;
+    --text: #1C2B40;
+    --muted: #6B7C93;
+    --white: #FFFFFF;
+    --green: #22C55E;
+    --orange: #FF8C42;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', 'Noto Serif SC', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* NAV TABS */
+  .sticky-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--navy);
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none;
+    border-bottom: 3px solid var(--blue);
+  }
+  .sticky-nav::-webkit-scrollbar { display: none; }
+  .nav-btn {
+    flex: 0 0 auto;
+    padding: 14px 20px;
+    color: rgba(255,255,255,0.6);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: all 0.2s;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -3px;
+  }
+  .nav-btn.active, .nav-btn:hover {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, #1A3A6E 60%, #0F2D55 100%);
+    color: white;
+    padding: 48px 24px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(26,92,255,0.3) 0%, transparent 70%);
+    top: -100px; right: -100px;
+    border-radius: 50%;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--navy);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+  .hero p {
+    font-size: 15px;
+    color: rgba(255,255,255,0.75);
+    max-width: 480px;
+    margin: 0 auto 24px;
+  }
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--gold);
+    display: block;
+  }
+  .stat-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.6);
+  }
+
+  /* SECTIONS */
+  .section {
+    display: none;
+    padding: 28px 20px;
+    max-width: 680px;
+    margin: 0 auto;
+    animation: fadeIn 0.3s ease;
+  }
+  .section.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--navy);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--gold);
+  }
+
+  /* CARDS */
+  .card {
+    background: white;
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 14px;
+    box-shadow: 0 2px 12px rgba(11,31,58,0.07);
+    border: 1px solid rgba(11,31,58,0.06);
+  }
+  .card-icon {
+    font-size: 22px;
+    margin-bottom: 8px;
+  }
+  .card h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .card p { color: var(--muted); font-size: 14px; }
+
+  /* FEATURE GRID */
+  .feature-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .feature-card {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(11,31,58,0.07);
+    border-left: 4px solid var(--blue);
+  }
+  .feature-card .icon { font-size: 20px; margin-bottom: 6px; }
+  .feature-card h4 { font-size: 13px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+  .feature-card p { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+  /* STEPS */
+  .steps { margin-bottom: 20px; }
+  .step {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 16px;
+    align-items: flex-start;
+  }
+  .step-num {
+    flex: 0 0 36px;
+    height: 36px;
+    background: var(--blue);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .step-content h4 { font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 3px; }
+  .step-content p { font-size: 13px; color: var(--muted); }
+
+  /* COMPARISON TABLE */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(11,31,58,0.07);
+    margin-bottom: 20px;
+    font-size: 13px;
+  }
+  .compare-table th {
+    background: var(--navy);
+    color: white;
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 600;
+  }
+  .compare-table th:first-child { width: 90px; }
+  .compare-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(11,31,58,0.06);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table tr:nth-child(even) td { background: var(--light); }
+  .compare-table tr.highlight td { background: #EBF3FF; }
+  .compare-table .brand { font-weight: 600; color: var(--navy); }
+  .compare-table .brand.us { color: var(--blue); }
+  .pro { color: var(--green); }
+  .con { color: #EF4444; }
+
+  /* FAQ */
+  .faq-item {
+    background: white;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(11,31,58,0.06);
+  }
+  .faq-q {
+    padding: 16px 18px;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--navy);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+  .faq-q::after {
+    content: '+';
+    font-size: 20px;
+    color: var(--blue);
+    font-weight: 300;
+    flex-shrink: 0;
+    transition: transform 0.2s;
+  }
+  .faq-item.open .faq-q::after { transform: rotate(45deg); }
+  .faq-a {
+    display: none;
+    padding: 0 18px 16px;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+    border-top: 1px solid var(--light);
+    padding-top: 14px;
+  }
+  .faq-item.open .faq-a { display: block; }
+
+  /* CTA BUTTONS */
+  .cta-section {
+    background: var(--navy);
+    border-radius: 16px;
+    padding: 24px;
+    text-align: center;
+    color: white;
+    margin-top: 20px;
+  }
+  .cta-section h3 { font-size: 18px; margin-bottom: 6px; }
+  .cta-section p { font-size: 13px; color: rgba(255,255,255,0.65); margin-bottom: 18px; }
+  .btn-group { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .btn {
+    display: inline-block;
+    padding: 12px 22px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .btn-primary { background: var(--gold); color: var(--navy); }
+  .btn-secondary { background: rgba(255,255,255,0.12); color: white; border: 1px solid rgba(255,255,255,0.2); }
+  .btn:hover { transform: translateY(-2px); }
+
+  /* TESTIMONIAL */
+  .testimonial {
+    background: linear-gradient(135deg, #EBF5FF, #F0F8FF);
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 14px;
+    border-left: 4px solid var(--sky);
+    position: relative;
+  }
+  .testimonial::before {
+    content: '"';
+    font-size: 60px;
+    color: var(--sky);
+    opacity: 0.2;
+    position: absolute;
+    top: 0; left: 14px;
+    font-family: Georgia, serif;
+    line-height: 1;
+  }
+  .testimonial p { font-size: 14px; color: var(--text); font-style: italic; line-height: 1.7; padding-left: 10px; }
+  .testimonial-author { font-size: 12px; color: var(--muted); margin-top: 10px; padding-left: 10px; font-weight: 600; font-style: normal; }
+
+  /* RETENTION MSG */
+  .retention-box {
+    background: linear-gradient(135deg, #FFF8E6, #FFF3CD);
+    border-radius: 14px;
+    padding: 20px;
+    border-left: 4px solid var(--gold);
+    margin-bottom: 14px;
+  }
+  .retention-box h4 { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+  .retention-box p { font-size: 13px; color: #5C4500; line-height: 1.7; }
+
+  /* COURSES */
+  .course-card {
+    background: white;
+    border-radius: 14px;
+    padding: 18px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 10px rgba(11,31,58,0.07);
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .course-emoji { font-size: 28px; flex-shrink: 0; }
+  .course-card h4 { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+  .course-card .grade { font-size: 12px; color: var(--blue); font-weight: 600; margin-bottom: 6px; }
+  .course-card p { font-size: 13px; color: var(--muted); }
+
+  .levels {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+  .level-tag {
+    background: var(--light);
+    color: var(--blue);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+  .level-tag.gold { background: #FFF8D6; color: #B8860B; }
+
+  @media (max-width: 400px) {
+    .feature-grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 26px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">Afficient Academy — NC</div>
+  <h1>AI 智能学习<br>让孩子飞速进步</h1>
+  <p>专利 AI 技术 · K–12 数学 & 英语 · 量身定制学习路径</p>
+  <div class="hero-stats">
+    <div class="stat">
+      <span class="stat-num">2–5x</span>
+      <span class="stat-label">学习速度提升</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">90%</span>
+      <span class="stat-label">学生达 A/A+</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">30分钟</span>
+      <span class="stat-label">每日投入</span>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="sticky-nav">
+  <button class="nav-btn active" onclick="showSection('intro')">📋 课程介绍</button>
+  <button class="nav-btn" onclick="showSection('courses')">📚 课程内容</button>
+  <button class="nav-btn" onclick="showSection('flow')">🚀 入学流程</button>
+  <button class="nav-btn" onclick="showSection('compare')">⚖️ 对比分析</button>
+  <button class="nav-btn" onclick="showSection('faq')">❓ 常见问题</button>
+  <button class="nav-btn" onclick="showSection('enroll')">📝 立即报名</button>
+</nav>
+
+<!-- SECTION 1: 课程介绍 -->
+<div id="intro" class="section active">
+  <h2 class="section-title">为什么选择 Afficient？</h2>
+
+  <div class="feature-grid">
+    <div class="feature-card">
+      <div class="icon">🎯</div>
+      <h4>个性化学习</h4>
+      <p>AI 精准定位知识盲点，只学"不会的"，零浪费</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">⚡</div>
+      <h4>高效提分</h4>
+      <p>数月内完成一年级课程，达 A/A+ 水平</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">💬</div>
+      <h4>即时反馈</h4>
+      <p>系统实时纠错，学习动力更强，无需等批改</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">✅</div>
+      <h4>贴合标准</h4>
+      <p>完全符合 Common Core，衔接北卡学校进度</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-icon">🏆</div>
+    <h3>游戏化学习，孩子主动进步</h3>
+    <p>全球荣誉榜实时排名 · 积分奖励系统（可兑无人机等好礼）· 家长 APP 实时查看学习报告</p>
+  </div>
+
+  <div class="card">
+    <div class="card-icon">👩‍🏫</div>
+    <h3>真人老师全程支持</h3>
+    <p>遇到难题可通过 Zoom 向老师一对一提问，顾问定期跟进学习进度，不让孩子掉队</p>
+  </div>
+
+  <div class="testimonial">
+    <p>孩子用了半年的 Afficient，英文进步很大，词汇量显著提升。也得到了学校老师的表扬！</p>
+    <div class="testimonial-author">— Afficient Academy 学生家长</div>
+  </div>
+</div>
+
+<!-- SECTION 2: 课程内容 -->
+<div id="courses" class="section">
+  <h2 class="section-title">课程内容</h2>
+
+  <div class="course-card">
+    <div class="course-emoji">🔢</div>
+    <div>
+      <h4>Afficient Math</h4>
+      <div class="grade">K – 12 年级 · Precalculus & Trigonometry</div>
+      <p>五个掌握级别，目标每年级 A+。超前完成 12 年级有利于高中选课、标化考试及竞赛备考。</p>
+      <div class="levels">
+        <span class="level-tag">待学习</span>
+        <span class="level-tag">Level 1</span>
+        <span class="level-tag">Level 2</span>
+        <span class="level-tag">Level 3</span>
+        <span class="level-tag gold">Afficiency ⭐</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="course-card">
+    <div class="course-emoji">📖</div>
+    <div>
+      <h4>Afficient English</h4>
+      <div class="grade">K – 8 年级</div>
+      <p>六个掌握级别，涵盖单词、语法、阅读技巧、写作技巧。可选重点强化词汇或 Language Arts，或同时进行。</p>
+      <div class="levels">
+        <span class="level-tag">待学习</span>
+        <span class="level-tag">Level 1–4</span>
+        <span class="level-tag gold">Afficiency ⭐</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="course-card">
+    <div class="course-emoji">🎓</div>
+    <div>
+      <h4>标化考试备考</h4>
+      <div class="grade">私立初高中 & SAT</div>
+      <p>ISEE（Lower / Middle / Upper）· SSAT（Middle / Upper）· SAT/ACT 数学及语文专项</p>
+    </div>
+  </div>
+
+  <div class="course-card">
+    <div class="course-emoji">🏅</div>
+    <div>
+      <h4>竞赛培养</h4>
+      <div class="grade">AMC 8 / AMC 10</div>
+      <p>为有志于参加数学竞赛的孩子打下扎实的计算和逻辑基础</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-icon">🌟</div>
+    <h3>Honor & High Honor 荣誉认证</h3>
+    <p>达到晋升标准的学生将获得 Honor Student 或 High Honor Student 认证，有助于孩子在学校数学课程中成功晋级。</p>
+  </div>
+</div>
+
+<!-- SECTION 3: 入学流程 -->
+<div id="flow" class="section">
+  <h2 class="section-title">入学流程</h2>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <h4>免费诊断测试 (Diagnostic Test)</h4>
+        <p>约 30 分钟，精准找出孩子知识体系中的"断层"，定位真实学习水平</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <h4>解读测评报告</h4>
+        <p>顾问面对面解析结果：Grade Level 差距、需补强的具体 Skills，让家长看清问题所在</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <h4>生成个性化学习计划</h4>
+        <p>AI 系统根据测试结果，自动规划通往 A/A+ 水平的最短路径</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <h4>正式入学</h4>
+        <p>每周 1–2 次到校（或远程）指导 + 每日在家练习（约 20–30 分钟）</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-content">
+        <h4>持续跟踪 & 调整</h4>
+        <p>家长 APP 实时查看每周报告，顾问定期回顾进度，确保孩子始终在正确轨道</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="retention-box">
+    <h4>💡 关于暂停账号的建议</h4>
+    <p>学习就像锻炼肌肉，有记忆，一旦中断知识点容易生疏。与其"停掉"，不如"减速"——我们可以把每周任务量调低，每天只需 15–20 分钟维持热度，既缓解压力，又保持连续性。</p>
+  </div>
+</div>
+
+<!-- SECTION 4: 对比分析 -->
+<div id="compare" class="section">
+  <h2 class="section-title">与其他机构对比</h2>
+
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>机构</th>
+        <th>模式</th>
+        <th>优势</th>
+        <th>局限</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="brand">Kumon</span></td>
+        <td>纸笔刷题</td>
+        <td class="pro">历史悠久，打基础</td>
+        <td class="con">重复率高；不符合美国大纲</td>
+      </tr>
+      <tr>
+        <td><span class="brand">IXL</span></td>
+        <td>线上题库</td>
+        <td class="pro">题库丰富，覆盖广</td>
+        <td class="con">无系统指导；无老师辅导</td>
+      </tr>
+      <tr>
+        <td><span class="brand">Khan</span></td>
+        <td>免费视频</td>
+        <td class="pro">通俗易懂，免费</td>
+        <td class="con">缺监督，无进度规划</td>
+      </tr>
+      <tr>
+        <td><span class="brand">RSM</span></td>
+        <td>班级授课</td>
+        <td class="pro">体系严谨，师资强</td>
+        <td class="con">固定进度，无法个性化</td>
+      </tr>
+      <tr class="highlight">
+        <td><span class="brand us">Afficient ✓</span></td>
+        <td>AI 智能</td>
+        <td class="pro">按美国大纲；AI查漏补缺；双重监督</td>
+        <td>需每周 2–3 小时投入；孩子需有一定自主性</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="card">
+    <div class="card-icon">🤖</div>
+    <h3>Afficient vs IXL — 一句话区别</h3>
+    <p><strong>想"补短板、学新知"</strong>→ 选 Afficient，AI 帮你规划，学得扎实高效<br><strong>想"练长板、夯基础"</strong>→ 选 IXL，题库刷熟练度</p>
+  </div>
+</div>
+
+<!-- SECTION 5: FAQ -->
+<div id="faq" class="section">
+  <h2 class="section-title">常见问题</h2>
+
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">Afficient 和 Kumon 有什么区别？</div>
+    <div class="faq-a">我们不推崇重复性的纸笔练习。Afficient 利用 AI 自动调整难度，重点在于"智能化"和"提速"，避免孩子因为枯燥而产生抵触心理。Kumon 的题目不符合美国 Common Core 大纲，而 Afficient 完全贴合北卡学校进度。</div>
+  </div>
+
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">每天需要花多少时间？</div>
+    <div class="faq-a">每天仅需 20–30 分钟的高质量练习。AI 系统保证每次学习都是高专注度、高产出的，让孩子在更短时间内取得更大进步，有更多时间休息和参与家庭活动。</div>
+  </div>
+
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">适合哪些孩子？</div>
+    <div class="faq-a">特别适合：① 基础不牢、需要查漏补缺的孩子；② 希望超前学习、为快班做准备的孩子；③ 准备 SSA 考试（北卡公立学校单科加速）的学生；④ 准备 AMC 8/10 竞赛的学生；⑤ 备考 ISEE / SSAT / SAT 的学生。</div>
+  </div>
+
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">上课形式是怎样的？</div>
+    <div class="faq-a">学生主要通过线上系统自学，每周 1–2 次到校或通过 Zoom 与老师互动答疑。遇到难题可随时在线提问，获得一对一辅导。家长通过专属 APP 实时查看学习报告。</div>
+  </div>
+
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">家长需要参与多少？</div>
+    <div class="faq-a">对自律的孩子，家长几乎无需操心。对需要监督的孩子，家长可通过 APP 实时跟踪，顾问也会定期联系家长汇报进度。系统会自动发送每周学习报告。</div>
+  </div>
+
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">多长时间能看到效果？</div>
+    <div class="faq-a">90% 的学生在 2–4 个月内以 A/A+ 成绩完成一个年级的课程，远超传统学校 9 个月 20% A 率的水平。每天 30 分钟，坚持练习，效果非常显著。</div>
+  </div>
+</div>
+
+<!-- SECTION 6: 报名 -->
+<div id="enroll" class="section">
+  <h2 class="section-title">立即开始</h2>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">→</div>
+      <div class="step-content">
+        <h4>新生咨询 & 预约免费测试</h4>
+        <p>填写新生报名表，顾问将在 24 小时内联系您安排免费诊断测试</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">→</div>
+      <div class="step-content">
+        <h4>在校学生 Online Class 报名</h4>
+        <p>已入学的学生可通过学生 Online Class 表单预约线上课时</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-section">
+    <h3>🚀 免费诊断测试</h3>
+    <p>30 分钟精准找出孩子知识盲点<br>完全免费 · 无需承诺</p>
+    <div class="btn-group">
+      <a href="https://form.jotform.com/ncafficiented/afficient-academy-consultation" target="_blank" class="btn btn-primary">📝 新生报名表</a>
+      <a href="https://form.jotform.com/ncafficiented/afficient-online-class" target="_blank" class="btn btn-secondary">💻 Online Class 报名</a>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px;">
+    <div class="card-icon">📞</div>
+    <h3>有问题？直接联系我们</h3>
+    <p>微信 / 电话：请联系您的课程顾问<br>我们提供中英文服务，随时为您解答</p>
+  </div>
+</div>
+
+<div style="height:40px"></div>
+
+<script>
+  function showSection(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    event.target.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function toggleFaq(el) {
+    el.classList.toggle('open');
+  }
+</script>
+</body>
+</html>
